@@ -4,10 +4,7 @@
 
 'use strict';
 
-import React, {
-  Platform,
-  NativeModules
-} from 'react-native';
+import { Platform, NativeModules } from 'react-native';
 
 export function checkPermission(perm) {
     return NativeModules.RNPermissionsAndroid.checkPermission(perm)
