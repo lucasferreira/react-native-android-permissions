@@ -50,7 +50,7 @@ npm install react-native-android-permissions --save
 ```gradle
 ...
 include ':RNPermissionsModule', ':app'
-project(':RNPermissionsModule').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-android-permissions')
+project(':RNPermissionsModule').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-android-permissions/android')
 ```
 
 * In `android/app/build.gradle`
