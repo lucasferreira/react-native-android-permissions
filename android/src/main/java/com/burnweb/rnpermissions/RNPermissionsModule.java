@@ -1,5 +1,7 @@
 package com.burnweb.rnpermissions;
 
+import android.app.Activity;
+
 import android.content.pm.PackageManager;
 
 import android.support.v4.app.ActivityCompat;
@@ -22,6 +24,7 @@ public class RNPermissionsModule extends ReactContextBaseJavaModule {
     private static final String TAG = RNPermissionsModule.class.getSimpleName();
     private static final String SOME_GRANTED = "SOME_GRANTED";
     private static final String ALL_GRANTED = "ALL_GRANTED";
+    private static final String E_ACTIVITY_DOES_NOT_EXIST = "E_ACTIVITY_DOES_NOT_EXIST";
     private static final String E_PERMISSION_DENIED = "E_PERMISSION_DENIED";
 
     private static HashMap<Integer, Promise> requestPromises = new HashMap<>();
@@ -38,7 +41,13 @@ public class RNPermissionsModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void checkPermission(final String perm, final Promise promise) {
-        int hasPermission = ContextCompat.checkSelfPermission(getCurrentActivity(), perm);
+        Activity currentActivity = getCurrentActivity();
+        if (currentActivity == null) {
+            promise.reject(E_ACTIVITY_DOES_NOT_EXIST, "Activity doesn't exist");
+            return;
+        }
+
+        int hasPermission = ContextCompat.checkSelfPermission(currentActivity, perm);
         if(hasPermission == PackageManager.PERMISSION_GRANTED) {
             promise.resolve(perm);
         } else {
@@ -48,11 +57,17 @@ public class RNPermissionsModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void requestPermission(final ReadableArray permsArray, final int reqCode, final Promise promise) {
+        Activity currentActivity = getCurrentActivity();
+        if (currentActivity == null) {
+            promise.reject(E_ACTIVITY_DOES_NOT_EXIST, "Activity doesn't exist");
+            return;
+        }
+
         WritableNativeMap q = new WritableNativeMap();
 
         List<String> permList = new ArrayList<>();
         for (int i=0; i<permsArray.size(); i++) {
-            int hasPermission = ContextCompat.checkSelfPermission(getCurrentActivity(), permsArray.getString(i));
+            int hasPermission = ContextCompat.checkSelfPermission(currentActivity, permsArray.getString(i));
             if(hasPermission != PackageManager.PERMISSION_GRANTED) {
                 permList.add(permsArray.getString(i)); // list to request
                 q.putBoolean(permsArray.getString(i), false);
@@ -67,7 +82,7 @@ public class RNPermissionsModule extends ReactContextBaseJavaModule {
             requestResults.put(reqCode, q);
 
             String[] perms = permList.toArray(new String[permList.size()]);
-            ActivityCompat.requestPermissions(getCurrentActivity(), perms, reqCode);
+            ActivityCompat.requestPermissions(currentActivity, perms, reqCode);
         }
         else
         {
