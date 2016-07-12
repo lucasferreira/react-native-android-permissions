@@ -63,6 +63,10 @@ dependencies {
 }
 ```
 
+
+**React Native 0.28.0-:**
+*MainActivity.java:*
+
 ```java
 import com.burnweb.rnpermissions.RNPermissionsPackage;  // <--- import
 
@@ -81,6 +85,48 @@ public class MainActivity extends ReactActivity {
       RNPermissionsPackage.onRequestPermissionsResult(requestCode, permissions, grantResults); // very important event callback
       super.onRequestPermissionsResult(requestCode, permissions, grantResults);
   }
+
+  ......
+
+}
+```
+
+**React Native 0.29.0+:**
+*MainActivity.java:*
+
+```java
+import com.burnweb.rnpermissions.RNPermissionsPackage;  // <--- import
+
+public class MainActivity extends ReactActivity {
+  ......
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+      RNPermissionsPackage.onRequestPermissionsResult(requestCode, permissions, grantResults); // very important event callback
+      super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+  }
+
+  ......
+
+}
+```
+
+*MainApplication.java:*
+
+```java
+import com.burnweb.rnpermissions.RNPermissionsPackage;  // <--- import
+
+public class MainApplication extends Application implements ReactApplication {
+  private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+  ......
+
+  @Override
+    protected List<ReactPackage> getPackages() {
+      return Arrays.<ReactPackage>asList(
+        new MainReactPackage(),
+          new RNPermissionsPackage()
+      );
+    }
 
   ......
 
