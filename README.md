@@ -209,7 +209,7 @@ class AwesomePermissions extends Component {
       });
     // for the correct StatusBar behaviour with translucent={true} we need to wait a bit and ask for permission after the first render cycle
     // (check https://github.com/facebook/react-native/issues/9413 for more info)
-    }, 100);
+    }, 0);
   }
   render() {
     return (
