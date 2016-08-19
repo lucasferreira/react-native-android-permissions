@@ -199,13 +199,17 @@ import {requestPermission} from 'react-native-android-permissions';
 
 class AwesomePermissions extends Component {
   componentDidMount() {
-    requestPermission("android.permission.ACCESS_FINE_LOCATION").then((result) => {
-      console.log("Granted!", result);
-      // now you can set the listenner to watch the user geo location
-    }, (result) => {
-      console.log("Not Granted!");
-      console.log(result);
-    });
+    setTimeout(() => {
+      requestPermission("android.permission.ACCESS_FINE_LOCATION").then((result) => {
+        console.log("Granted!", result);
+        // now you can set the listenner to watch the user geo location
+      }, (result) => {
+        console.log("Not Granted!");
+        console.log(result);
+      });
+    // for the correct StatusBar behaviour with translucent={true} we need to wait a bit and ask for permission after the first render cycle
+    // (check https://github.com/facebook/react-native/issues/9413 for more info)
+    }, 0);
   }
   render() {
     return (
