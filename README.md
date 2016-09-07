@@ -3,7 +3,9 @@ React Native Android Permissions *experimental module* - Android M (6.0) permiss
 
 If you need to work with Android M (6.0+) permissions model this experimental module that can be helpful to you. This works with only two methods: *checkPermission* and *requestPermission*.
 
-First of all you need to set in your *android/app/build.gradle* file the *targetSdkVersion* to **23**:
+**FUTURE DEPRECATION WARNING:** The official RN *PermissionsAndroid* will be realized soon (https://github.com/facebook/react-native/pull/9292). So this module will be deprecated after that.
+
+First of all you need to set in your *android/app/build.gradle* file the *targetSdkVersion* to **23** or a major SDK version:
 
 ```gradle
 ...
@@ -63,35 +65,8 @@ dependencies {
 }
 ```
 
+**React Native >= 0.29:**
 
-**React Native 0.28.0-:**
-*MainActivity.java:*
-
-```java
-import com.burnweb.rnpermissions.RNPermissionsPackage;  // <--- import
-
-public class MainActivity extends ReactActivity {
-  ......
-
-  @Override
-  protected List<ReactPackage> getPackages() {
-    return Arrays.<ReactPackage>asList(
-            new MainReactPackage(),
-            new RNPermissionsPackage()); // <------ add this line to your MainActivity class
-  }
-
-  @Override
-  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-      RNPermissionsPackage.onRequestPermissionsResult(requestCode, permissions, grantResults); // very important event callback
-      super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-  }
-
-  ......
-
-}
-```
-
-**React Native 0.29.0+:**
 *MainActivity.java:*
 
 ```java
@@ -124,7 +99,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
-          new RNPermissionsPackage()
+        new RNPermissionsPackage() // <------ add this line to your MainApplication class
       );
     }
 
@@ -132,6 +107,36 @@ public class MainApplication extends Application implements ReactApplication {
 
 }
 ```
+
+
+**React Native <= 0.28:**
+
+*MainActivity.java:*
+
+```java
+import com.burnweb.rnpermissions.RNPermissionsPackage;  // <--- import
+
+public class MainActivity extends ReactActivity {
+  ......
+
+  @Override
+  protected List<ReactPackage> getPackages() {
+    return Arrays.<ReactPackage>asList(
+            new MainReactPackage(),
+            new RNPermissionsPackage()); // <------ add this line to your MainActivity class
+  }
+
+  @Override
+  public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+      RNPermissionsPackage.onRequestPermissionsResult(requestCode, permissions, grantResults); // very important event callback
+      super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+  }
+
+  ......
+
+}
+```
+
 
 ## Example of checkPermission method:
 
