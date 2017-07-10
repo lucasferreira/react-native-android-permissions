@@ -13,8 +13,11 @@ export function checkPermission(perm) {
 export function requestPermission(perm) {
     if(typeof perm == "string") perm = [perm];
 
-    let r = Math.random() * (perm[0].length||1);
-    let permCode = Math.round(r + (new Date().getTime())/1000);
+    // permCode greater than 16 bits causes an error so limit code to max of 65535
+    let maximum = 65535;
+    let minimum = 1;
+
+    let permCode = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
 
     return NativeModules.RNPermissionsAndroid.requestPermission(perm, permCode);
 };
