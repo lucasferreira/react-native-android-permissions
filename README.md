@@ -3,7 +3,7 @@ React Native Android Permissions *experimental module* - Android M (6.0) permiss
 
 If you need to work with Android M (6.0+) permissions model this experimental module that can be helpful to you. This works with only two methods: *checkPermission* and *requestPermission*.
 
-**FUTURE DEPRECATION WARNING:** The official RN *PermissionsAndroid* will be realized soon (https://github.com/facebook/react-native/pull/9292) and the future documentation are [here](http://facebook.github.io/react-native/releases/next/docs/permissionsandroid.html). So this module will be deprecated after that.
+**FUTURE DEPRECATION WARNING:** The official RN *PermissionsAndroid* will be realized soon (https://github.com/facebook/react-native/pull/9292) and the future documentation are [here](https://facebook.github.io/react-native/docs/permissionsandroid.html). So this module will be deprecated after that.
 
 First of all you need to set in your *android/app/build.gradle* file the *targetSdkVersion* to **23** or a major SDK version:
 
