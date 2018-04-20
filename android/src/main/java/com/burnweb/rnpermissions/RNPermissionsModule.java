@@ -41,13 +41,13 @@ public class RNPermissionsModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void checkPermission(final String perm, final Promise promise) {
-        Activity currentActivity = getCurrentActivity();
-        if (currentActivity == null) {
+        Context context = getReactApplicationContext();
+        if (context == null) {
             promise.reject(E_ACTIVITY_DOES_NOT_EXIST, "Activity doesn't exist");
             return;
         }
 
-        int hasPermission = ContextCompat.checkSelfPermission(currentActivity, perm);
+        int hasPermission = ContextCompat.checkSelfPermission(context, perm);
         if(hasPermission == PackageManager.PERMISSION_GRANTED) {
             promise.resolve(perm);
         } else {
