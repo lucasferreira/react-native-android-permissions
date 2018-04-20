@@ -1,6 +1,6 @@
 {
   "name": "react-native-android-permissions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React Native Android Permissions experimental module - Android M (6.0) permissions like to your React Native application",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,6 @@
   "repository": "https://github.com/lucasferreira/react-native-android-permissions",
   "bugs": "https://github.com/lucasferreira/react-native-android-permissions/issues",
   "peerDependencies": {
-    "react-native": ">=0.20"
+    "react-native": "*"
   }
 }
