@@ -43,7 +43,7 @@ public class RNPermissionsModule extends ReactContextBaseJavaModule {
     public void checkPermission(final String perm, final Promise promise) {
         Context context = getReactApplicationContext();
         if (context == null) {
-            promise.reject(E_ACTIVITY_DOES_NOT_EXIST, "Activity doesn't exist");
+            promise.reject(E_ACTIVITY_DOES_NOT_EXIST, "Context doesn't exist");
             return;
         }
 
