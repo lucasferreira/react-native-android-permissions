@@ -3,6 +3,7 @@ package com.burnweb.rnpermissions;
 import android.app.Activity;
 
 import android.content.pm.PackageManager;
+import android.content.Context;
 
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
