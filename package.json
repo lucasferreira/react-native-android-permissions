@@ -1,6 +1,6 @@
 {
   "name": "react-native-android-permissions",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "React Native Android Permissions experimental module - Android M (6.0) permissions like to your React Native application",
   "main": "index.js",
   "scripts": {
